@@ -159,6 +159,8 @@ public class Player extends AppCompatActivity {
                 currtime.setText(currentTime);
                 handler.postDelayed(this,delay);
             }
+
+
         },delay);
 
 
