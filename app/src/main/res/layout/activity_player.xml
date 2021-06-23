@@ -6,20 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".Player"
     android:orientation="vertical"
-    android:weightSum="10">
+    android:weightSum="10"
+    android:background="@drawable/wall"
+
+ >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="7"
         android:gravity="center"
         android:orientation="vertical"
+
         >
+
         <ImageView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:background="@drawable/back"
-            
+            android:id="@+id/imageView"
+
             />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,10 +36,50 @@
             android:gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:singleLine="true"
+            android:id="@+id/songLable"
             android:marqueeRepeatLimit="marquee_forever"
             android:ellipsize="marquee"
             android:scrollHorizontally="true"
             android:textColor="@color/purple_500"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <SeekBar
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekbar"
+                android:layout_centerInParent="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="20dp"
+                android:layout_marginBottom="40dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtStart"
+                android:layout_toLeftOf="@+id/seekbar"
+                android:layout_centerInParent="true"
+                android:text="0:00"
+                android:layout_alignParentLeft="true"
+                android:textColor="#fff"
+                android:layout_marginLeft="20dp"
+                android:textSize="14sp"
+
+                /> <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtstop"
+                android:layout_toRightOf="@+id/seekbar"
+                android:layout_centerInParent="true"
+                android:text="4:10"
+                android:layout_alignParentRight="true"
+                android:textColor="#fff"
+                android:layout_marginRight="20dp"
+                android:textSize="14sp"
+
+                />
+        </RelativeLayout>
 
 
     </LinearLayout>
@@ -45,13 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <SeekBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/seekbar"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="60dp"
-                />
+
             <Button
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -74,6 +115,18 @@
                 android:layout_toLeftOf="@+id/pause"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/icon_previous"/>
+
+            <com.gauravk.audiovisualizer.visualizer.BarVisualizer
+                xmlns:custom="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/blast"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_alignParentBottom="true"
+                custom:avDensity="0.5"
+                custom:avType="outline"
+                custom:avWidth="4dp"
+                custom:avColor="#FF362E"
+                custom:avSpeed="normal"/>
 
         </RelativeLayout>
 
