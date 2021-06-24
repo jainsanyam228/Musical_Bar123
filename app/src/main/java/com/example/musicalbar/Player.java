@@ -64,6 +64,7 @@ public class Player extends AppCompatActivity {
         btnNext = (Button) findViewById(R.id.next);
         btnPause = (Button) findViewById(R.id.pause);
 
+        visualizer = findViewById(R.id.blast);
         btnPrev = (Button) findViewById(R.id.prev);
 
         songText = (TextView) findViewById(R.id.songLable);
@@ -159,8 +160,6 @@ public class Player extends AppCompatActivity {
                 currtime.setText(currentTime);
                 handler.postDelayed(this,delay);
             }
-
-
         },delay);
 
 
@@ -184,6 +183,10 @@ public class Player extends AppCompatActivity {
                 btnNext.performClick();
             }
         });
+        int audioSessionId = mediaPlayer.getAudioSessionId();
+        if (audioSessionId != -1)
+            visualizer.setAudioSessionId(audioSessionId);
+
 
 
 
@@ -205,6 +208,16 @@ public class Player extends AppCompatActivity {
 
                 mediaPlayer.start();
                 startAnimation(imageView);
+                int audioSessionId = mediaPlayer.getAudioSessionId();
+                if (audioSessionId != -1)
+                    visualizer.setAudioSessionId(audioSessionId);
+                songSeekbar.setMax(mediaPlayer.getDuration());
+
+                String endTime = createTime(mediaPlayer.getDuration());
+                maxtime.setText(endTime);
+               int  currentPosition = mediaPlayer.getCurrentPosition();
+                songSeekbar.setProgress(currentPosition);
+
 
 
             }
@@ -224,12 +237,22 @@ public class Player extends AppCompatActivity {
 
 
 
+                int audioSessionId = mediaPlayer.getAudioSessionId();
+                if (audioSessionId != -1)
+                   visualizer.setAudioSessionId(audioSessionId);
+
+                String endTime = createTime(mediaPlayer.getDuration());
+                maxtime.setText(endTime);
 
 
 
                 mediaPlayer.start();
                 btnPause.setBackgroundResource(R.drawable.icon_pause);
                 startAnimation(imageView);
+                songSeekbar.setMax(mediaPlayer.getDuration());
+                int  currentPosition = mediaPlayer.getCurrentPosition();
+                songSeekbar.setProgress(currentPosition);
+
             }
         });
     }
@@ -243,8 +266,8 @@ public class Player extends AppCompatActivity {
 
     public String createTime(int duration){
         String time = "";
-        int min = duration/60000;
-        int sec = (duration/1000)%60;
+        int min = duration/1000/60;
+        int sec = duration/1000%60;
         time+= min + ":" ;
         if(sec<10){
             time += "0" ;
